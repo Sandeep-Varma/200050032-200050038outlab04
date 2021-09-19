@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Explore{% endblock %}
+
+{% block content %}
+<div style="background-color: lightgrey; padding: 10px;">
+<h3 style="color:red;"><center><font size="+2"><span style="font-weight:normal">Built by 200050032 200050038</span></font></h3>
+<h1><center><font size="+10"><span style="font-weight:normal">Welcome to GitHub Profiles!</span></font></h1>
+
+{% if user.is_authenticated %}
+  <center>
+  <button style="width: 130px; height: 40px; border-radius: 10px; background-color:DodgerBlue; color:white;" type="submit"><font size="+2">Explore</font></button>
+  <span>&nbsp;&nbsp;&nbsp;</span>
+  <button style="width: 130px; height: 40px; border-radius: 10px; background-color:DodgerBlue;" type="submit"><font size="+2"><a style="color:white; text-decoration:none" href="{% url 'profile' user.pk %}">My Profile</a></font></button>
+  <span>&nbsp;&nbsp;&nbsp;</span>
+  <button style="width: 130px; height: 40px; border-radius: 10px; background-color:DodgerBlue;" type="submit"><font size="+2"><a style="color:white; text-decoration:none" href="{% url 'logout' %}">Logout</a></font></button>
+{% else %}
+  <center>
+  <button style="width: 130px; height: 40px; border-radius: 10px; background-color:DodgerBlue;" type="submit"><font size="+2"><a style="color:white; text-decoration:none" href="{% url 'signup' %}">Signup</a></font></button>
+  <span>&nbsp;&nbsp;&nbsp;</span>
+  <button style="width: 130px; height: 40px; border-radius: 10px; background-color:DodgerBlue;" type="submit"><font size="+2"><a style="color:white; text-decoration:none" href="{% url 'login' %}">Login</a></font></button>
+{% endif %}
+</div>
+
+  {% if object_list %}
+   
+    {% for object in object_list %}
+        <li style = "margin-left: 200px;"><a><font style="color:DodgerBlue; border:1px; border-color:DodgerBlue; border-radius:10px; padding:7px" size="+3"><a href="{% url 'profile' object.pk %}">{{ object.username}} </font></a><br></br><br></br></li>
+    {% endfor %}
+   
+  {% else %}
+    <p>No polls are available.</p> 
+  {% endif %}
+{% endblock %}

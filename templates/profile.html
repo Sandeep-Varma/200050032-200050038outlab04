@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div style="background-color: lightgrey; padding: 10px;">
+<h3 style="color:red;"><center><font size="+2"><span style="font-weight:normal">Built by 200050032 200050038</span></font></h3>
+<h1><center><font size="+10"><span style="font-weight:normal">Welcome to GitHub Profiles!</span></font></h1>
+{% if user.is_authenticated %}
+  <center>
+  <button style="width: 130px; height: 40px; border-radius: 10px; background-color:DodgerBlue;" type="submit"><font size="+2"><a style="color:white; text-decoration:none" href="{% url 'explore' %}">Explore</a></font></button>
+  <span>&nbsp;&nbsp;&nbsp;</span>
+  <button style="width: 130px; height: 40px; border-radius: 10px; background-color:DodgerBlue;" type="submit"><font size="+2"><a style="color:white; text-decoration:none" href="{% url 'profile' user.pk %}">My Profile</a></font></button>
+  <span>&nbsp;&nbsp;&nbsp;</span>
+  <button style="width: 130px; height: 40px; border-radius: 10px; background-color:DodgerBlue;" type="submit"><font size="+2"><a style="color:white; text-decoration:none" href="{% url 'logout' %}">Logout</a></font></button>
+{% else %}
+  <center>
+  <button style="width: 130px; height: 40px; border-radius: 10px; background-color:DodgerBlue;" type="submit"><font size="+2"><a style="color:white; text-decoration:none" href="{% url 'signup' %}">Signup</a></font></button>
+  <span>&nbsp;&nbsp;&nbsp;</span>
+  <button style="width: 130px; height: 40px; border-radius: 10px; background-color:DodgerBlue;" type="submit"><font size="+2"><a style="color:white; text-decoration:none" href="{% url 'login' %}">Login</a></font></button>
+{% endif %}
+</div>
+
+{% if user.is_authenticated %}
+    <p style = "margin-left: 200px;"> {{u.first_name}} {{u.last_name}} (@{{u.username}})</p>
+  
+    <p style = "margin-left: 200px;">{{u.profile.followers}} followers</p>
+    
+    {% if user.pk is u.pk %}
+    <p style = "margin-left: 200px;">Last Updated: {{u.profile.last_updated_time}}
+    <a  href="{% url 'profile1' user.pk %}">update now</a>
+    {%endif %}</p>
+    <br></br>
+    {% for e in  u.profile.repo_list  %}
+    <li style = "margin-left: 200px;">{% for f in e %}
+           {{f}}{%endfor %}</li>
+    
+    {% endfor %}
+    
+{% endif %}
+
+{% endblock %}

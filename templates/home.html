@@ -1,0 +1,27 @@
+<!-- templates/home.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div style="background-color: lightgrey; padding: 10px;">
+<h3 style="color:red;"><center><font size="+2"><span style="font-weight:normal">Built by 200050032 200050038</span></font></h3>
+<h1><center><font size="+10"><span style="font-weight:normal">Welcome to GitHub Profiles!</span></font></h1>
+
+{% if user.is_authenticated %}
+  <center>
+  <button style="width: 130px; height: 40px; border-radius: 10px; background-color:DodgerBlue;" type="submit"><font size="+2"><a style="color:white; text-decoration:none" href="{% url 'explore' %}">Explore</a></font></button>
+  <span>&nbsp;&nbsp;&nbsp;</span>
+  <button style="width: 130px; height: 40px; border-radius: 10px; background-color:DodgerBlue;" type="submit"><font size="+2"><a style="color:white; text-decoration:none" href="{% url 'profile' user.pk %}">My Profile</a></font></button>
+  <span>&nbsp;&nbsp;&nbsp;</span>
+  <button style="width: 130px; height: 40px; border-radius: 10px; background-color:DodgerBlue;" type="submit"><font size="+2"><a style="color:white; text-decoration:none" href="{% url 'logout' %}">Logout</a></font></button>
+{% else %}
+  <center>
+  <button style="width: 130px; height: 40px; border-radius: 10px; background-color:DodgerBlue;" type="submit"><font size="+2"><a style="color:white; text-decoration:none" href="{% url 'signup' %}">Signup</a></font></button>
+  <span>&nbsp;&nbsp;&nbsp;</span>
+  <button style="width: 130px; height: 40px; border-radius: 10px; background-color:DodgerBlue;" type="submit"><font size="+2"><a style="color:white; text-decoration:none" href="{% url 'login' %}">Login</a></font></button>
+{% endif %}
+
+</div>
+{% endblock %}
